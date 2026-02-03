@@ -1,10 +1,3 @@
-El .env.examplo archivo contiene variables de entorno necesarias para la configuración del proyecto. Asegúrate de crear un archivo .env en el mismo directorio que este README.md y de definir las siguientes variables:
-
-```plaintext  
-OPENAI_API_KEY=tu_clave_de_api_aqui
-```
-Reemplaza `tu_clave_de_api_aqui` con tu clave de API real de OpenAI.
-
 # Configuración del Entorno
 
 1. Crea un archivo `.env` en el directorio raíz del proyecto.
