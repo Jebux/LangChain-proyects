@@ -1,13 +1,23 @@
-fastapi
-uvicorn
-python-multipart
-langchain
-langchain-openai
-langchain-community
-chromadb
-google-api-python-client
-google-auth-httplib2
-google-auth-oauthlib
-python-dotenv
-pypdf
-tiktoken
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.27,<1.0
+python-multipart>=0.0.9,<1.0
+python-dotenv>=1.0,<2.0
+
+# LangChain stack (compatible entre sí)
+langchain>=0.3,<0.4
+langchain-core>=0.3,<0.4
+langchain-openai>=0.2,<0.3
+langchain-community>=0.3,<0.4
+langgraph>=0.2,<0.3
+# NO uses langgraph-prebuilt (te rompe por langchain-core>=1.0)
+
+# Vector DB / RAG
+langchain-chroma>=0.1,<0.2
+chromadb>=0.5,<0.6
+pypdf>=4.0,<6.0
+tiktoken>=0.6,<1.0
+
+# Google APIs
+google-api-python-client>=2.0,<3.0
+google-auth-httplib2>=0.2,<1.0
+google-auth-oauthlib>=1.2,<2.0

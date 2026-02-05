@@ -1,6 +1,6 @@
 from langchain_openai import ChatOpenAI
-from langchain.agents import AgentExecutor, create_openai_tools_agent
-from langchain import hub
+from langgraph.prebuilt import create_react_agent
+from langchain_core.messages import SystemMessage
 from app.rag import get_retriever_tool_func
 from app.tools import schedule_event
 from dotenv import load_dotenv
@@ -12,7 +12,7 @@ def get_agent_executor():
     """Configures and returns the AgentExecutor."""
     
     # Initialize LLM
-    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+    llm = ChatOpenAI(model="gpt-4.1-mini", temperature=0)
     
     # Define Tools
     rag_tool = get_retriever_tool_func()
@@ -20,12 +20,13 @@ def get_agent_executor():
     
     # Get the prompt to use - you can modify this!
     # Using a standard OpenAI Tools agent prompt
-    prompt = hub.pull("hwchase17/openai-tools-agent")
-    
-    # Construct the OpenAI Tools agent
-    agent = create_openai_tools_agent(llm, tools, prompt)
+    prompt = SystemMessage(content="""
+                You are an assistant that can use tools.
+                If using the retriever, cite relevant passages.
+                Be concise and helpful.
+                """)
     
     # Create an agent executor by passing in the agent and tools
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    agent_executor = create_react_agent(llm, tools, state_modifier=prompt)
     
     return agent_executor
